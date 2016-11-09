@@ -1,5 +1,5 @@
 <?php
-require_once 'saetv2.ex.class.php';
+//require_once 'saetv2.ex.class.php';
 /**
  * 注册与登录控制器
  */
