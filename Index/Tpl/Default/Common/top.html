@@ -1,0 +1,42 @@
+<div style="background-color: #f2f2f2;padding: 0px;" class="col-sm-12 hidden-md hidden-lg  ">
+	<div class="dropdown">
+		<button class="btn btn-primary dropdown-toggle  btn-block" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+   			<h5 class="text-right">
+   				<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+   			</h5>
+ 		</button>
+		<ul class="dropdown-menu btn-block" aria-labelledby="dropdownMenu1">
+			<nav id='weekcon'>
+				<ul class="pager">
+					<li class="previous">
+						<a href="{:U('index', array('week' => $preweek))}" week="123" class="pre"><span aria-hidden="true">&larr;</span>上一周</a>
+					</li>
+					<li class="next">
+					<a href="{:U('index', array('week' => $nextweek))}" class="nex">下一周 <span aria-hidden="true">&rarr;</span></a>
+					</li>
+				</ul>
+			</nav>
+			<li class="list-group-item">
+				<form action="{:U('Myshow/index')}" method='get' role="search"  >
+					<input type="text" class="form-control" placeholder="Search" name="search" />
+				</form>
+			</li>
+			<li class="list-group-item">
+				<a href="{:U('Index/index')}"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 日历</a>
+			</li>
+			<li class="list-group-item">
+				<a href="{:U('Myshow/index',array('action' =>'myshow'))}"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 我的美剧</a>
+			</li>
+			<li class="list-group-item">
+				<a href="{:U('Myshow/index',array('action' =>'allshow'))}"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> 发现</a>
+			</li>
+
+			<li class="list-group-item">
+				<a href="{:U('UserSetting/index')}"><span class="glyphicon glyphicon-cog" aria-hidden="true"> 设置</span></a>
+			</li>
+			<li class="list-group-item">
+				<a href="{:U('Common/loginOut')}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"> 退出</span></a>
+			</li>
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,55 @@
+<!-- 左边栏 开始-->
+<link rel="stylesheet" href="__PUBLIC__/css/calendar.css">
+<script type="text/javascript">
+	var indexurl = "{:U('Index/index')}";
+</script>
+<div class="hidden-sm  hidden-xs col-md-2" id="cmenu">
+	<div id="menu" style="background-color: #f2f2f2;">
+		<p style="text-align:center">
+			<img src="
+				<if condition='$_SESSION["facemini"]'>
+					__ROOT__/Uploads/Face/{$_SESSION["facemini"]}"
+					<else/>
+					__PUBLIC__/img/logo_flat.png"
+				</if>
+				class="img-rounded">
+		</p>
+		<p style="text-align:center">
+			<a href="{:U('UserSetting/index')}">{$_SESSION["username"]}</a>
+		</p>
+		<form action="{:U('Myshow/index')}" method='get' role="search" style="margin: 20px 0;">
+			<input type="text" class="form-control" placeholder="Search" name="search" />
+		</form>
+		<nav id='weekcon'>
+			<ul class="pager">
+				<li class="previous"><a href="{:U('index', array('week' => $preweek))}" week="123" class="pre"><span aria-hidden="true">&larr;</span>上一周</a></li>
+				<li class="next"><a href="{:U('index', array('week' => $nextweek))}" class="nex">下一周 <span aria-hidden="true">&rarr;</span></a></li>
+			</ul>
+		</nav>
+		<ul class="list-group">
+			<li class="list-group-item">
+				<a href="{:U('Index/index')}"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 日历</a>
+			</li>
+			<li class="list-group-item">
+				<a href="{:U('Myshow/index',array('action' =>'myshow'))}"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 我的美剧</a>
+			</li>
+			<li class="list-group-item">
+				<a href="{:U('Myshow/index',array('action' =>'allshow'))}"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> 发现</a>
+			</li>
+		</ul>
+		<div class="list-group-item">
+			<div id="cal"></div>
+		</div>
+		<script src="__PUBLIC__/js/calendar.js"></script>
+		<hr />
+		<ul class="list-group">
+			<li class="list-group-item">
+				<a href="{:U('UserSetting/index')}"><span class="glyphicon glyphicon-cog" aria-hidden="true"> 设置</span></a>
+			</li>
+			<li class="list-group-item">
+				<a href="{:U('Common/loginOut')}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"> 退出</span></a>
+			</li>
+		</ul>
+	</div>
+</div>
+<!-- 左边栏 结束-->

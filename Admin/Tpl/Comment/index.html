@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<title>用户列表</title>
+		<link rel="stylesheet" href="__PUBLIC__/Css/common.css" />
+		<script type="text/javascript" src='__PUBLIC__/Js/jquery-1.8.2.min.js'></script>
+		<script type="text/javascript" src='__PUBLIC__/Js/common.js'></script>
+	</head>
+
+	<body>
+		<div class='status'>
+			<span>评论列表</span>
+		</div>
+		<table class='table'>
+			<tr>
+				
+				<th>评论ID</th>
+				<th>用户ID</th>
+				<th>用户昵称</th>
+				<th>头像</th>
+				<th>剧集ID</th>
+				<th>评论内容</th>
+				<th>评论时间</th>
+				<th>评论状态</th>
+				<th>评论楼层</th>
+				<th>操作</th>
+			</tr>
+			<foreach name='comments' item='v'>
+				<tr>
+					<td width='50' align='center'>{$v.commentid}</td>
+					<td width='50' align='center'>{$v.userid}</td>
+					<td width='50' align='center'>{$v.username}</td>
+					<td width='80' align='center'>
+						<img src="<if condition='$v[" facemini "]'>__ROOT__/Uploads/Face/{$v.facemini}<else/>__ROOT__/Public/img/noface.gif</if>" width='50' height='50' />
+					</td>
+					<td width='50' align='center'>{$v.episodeid}</td>
+					<td width='550' align='center'>{$v.comment}</td>
+					<td width='100' align='center'>{$v.commenttime}</td>
+					<td width='60' align='center'>
+						<if condition='$v["remove"]'>已删除
+							<else/>未删除
+						</if>
+					</td>
+					<td width='50' align='center'>{$v.floor}</td>
+					<td width='50' align='center'>
+						<if condition='$v["remove"]'>
+							<a href="{:U('removeComment', array('commentid' => $v['commentid'], 'remove' => 0))}" class='add remove'>解除删除</a>
+							<else/>
+							<a href="{:U('removeComment', array('commentid' => $v['commentid'], 'remove' => 1))}" class='add remove'>删除评论</a>
+						</if>
+					</td>
+				</tr>
+			</foreach>
+			<tr height='50'>
+				<td align='center' colspan='10'>{$page}</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

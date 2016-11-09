@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{$episode.showname} S{$episode.seasonnum}E{$episode.episodenum}</title>
+		<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+		<script src="__PUBLIC__/js/jquery-1.12.4.min.js"></script>
+		<script src="__PUBLIC__/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			var watchurl = "{:U('Common/watch')}";
+			var getrate = "{:U('Episode/getRate')}";
+			var runrating = "{:U('Episode/runRating')}";
+			var followurl = "{:U('Common/follow')}";
+		</script>
+		<script src="__PUBLIC__/js/myshow.js"></script>
+		<script src="__PUBLIC__/js/episode.js"></script>
+
+		<style type="text/css">
+			* {
+				border: #FFFFFF;
+			}
+			
+			#weekcon {
+				display: none;
+			}
+			
+			.showtil {
+				color: white;
+			}
+			
+			.showtil:hover {
+				color: white;
+			}
+			
+			.date {
+				font-size: 50px;
+			}
+			
+			li {
+				display: inline-block;
+				padding-right: 5px;
+				padding-left: 5px;
+			}
+			
+			#submitbtn {
+				color: black;
+				background: #FFD700;
+				border-color: #FFD700;
+			}
+			
+			#submitbtn:disabled {
+				color: black;
+				background: #FFD700;
+				border-color: #FFD700;
+			}
+			
+			#submitbtn:hover {
+				background: #F9C80C;
+				border-color: #F9C80C;
+			}
+			
+			div#menu {
+				padding: 10px;
+				position: fixed;
+				overflow-y: auto;
+			}
+			
+			a:hover {
+				text-decoration: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Stack the columns on mobile by making one full-width and the other half-width -->
+		<div class="row" style="margin-right: 0px;">
+			<!-- 左边栏 开始-->
+			<include file='Common:left' />
+			<!-- 左边栏 结束-->
+			<div class="col-sm-12 col-md-10">
+				<include file='Common:top' />
+				<div>
+					<div class="jumbotron" style="background:url(
+                        			<if condition='$episode[covermax]'>
+                         			   __ROOT__/Uploads/Cover/{$episode.covermax}
+                      				  <else/>
+                         			   __PUBLIC__/Images/nocover.gif
+                      				 </if>) repeat scroll center 0;
+                      				 margin: 0px;  ">
+						<span style="text-align:center;color: #ffffff;  ">
+							<a  href="{:U('Season/index',array('sid' => $episode['showid']))}" class="showtil"><h1>{$episode.showname}</h1></a>
+							<p>S{$episode.seasonnum}E{$episode.episodenum}</p> 	
+							<p> 
+								<span class="
+								<if condition=" $follow eq 1 ">
+									glyphicon glyphicon-ok watchbtn
+       							
+       							
+       							<else />  glyphicon glyphicon-eye-open watchbtn		
+								</if>	
+								 btn-primary btn-lg
+								"id="episode" eid="{$episode.episodeid}" iswatch="{$follow}" sid="{$episode.showid}" isfollow="0" aria-hidden="true" role="button">
+								<if condition=" $follow eq 1 "> 已看!
+       							
+       							<else />  已看?
+								</if>	
+								</span>
+						</p>
+						</span>
+					</div>
+				</div>
+				<div class="row" style="  background-color:#f9f9f9 ;margin-left:0px">
+					<div class="col-sm-12 col-md-6">
+						<div style="padding: 50px ;   ">
+							<div>
+								<span>{$episode.episodename}</span> •
+								<span>{$episode.time}</span> •
+								<span>{$episode.data}</span>
+							</div>
+							<span style="  color:#c8c8c8 ;">{$episode.epsum}</span>
+						</div>
+					</div>
+					<div class="hidden-sm col-md-6" style="border-left: solid #777777;">
+						<div style="padding: 50px 0px ;   ">
+							{$episode.seasum}
+						</div>
+					</div>
+				</div>
+				<!--右下开始-->
+				<div style="padding: 30px">
+					<div class="row" style="   margin-left:0px">
+						<!-- 剧集列表开始 -->
+						<h3 style="margin-bottom:20px">episode
+							<foreach name='episodes' item='v'  >
+						 <a 
+						 	class="
+								<if condition=" $v.episodeid eq  $episode.episodeid ">
+									label-primary
+                   				<else/> 
+                   					label-default
+ 								</if>	
+ 								label"
+								 href="{:U('Episode/index',array('eid' => $v['episodeid']))}" >
+							{$v.episodenum}
+						 </a>&nbsp;
+						</foreach>												
+						</h3>
+						<!-- 剧集列表结束   -->
+						<!-- 剧集评分结束   -->
+						<div id="rating" style="margin-bottom:20px">
+							<button value="1" type="button" class="btn btn-default">很差</button>
+							<button value="2" type="button" class="btn btn-default">较差 </button>
+							<button value="3" type="button" class="btn btn-default">还行 </button>
+							<button value="4" type="button" class="btn btn-default">推荐</button>
+							<button value="5" type="button" class="btn btn-default">力推</button>
+						</div>
+						<!-- 剧集评分结束   -->
+					</div>
+					<!--评论发布框-->
+					<div class="send_wrap">
+						<div class="send_prompt fright">
+							<p> <span id="send_info">还可输入</span><span id="send_num">140</span>个字</p>
+						</div>
+						<div class="send_write">
+							<form action="{:U('comment')}" method="post">
+								<textarea id="comment" name="comment" cols="20" class="form-control" style=" width: 80%; height: 100px; resize:none;"></textarea>
+								<br />
+								<input type="hidden" name="episodeid" value="{$episode.episodeid}" />
+								<input id="submitbtn" type="submit" class="btn btn-primary" value="发表" disabled/>
+							</form>
+						</div>
+					</div>
+					<!--评论发布框-->
+					<foreach name='comments' item='v'>
+						<div class="media" style=" width: 80%; ">
+							<div class="media-left ">
+								<img style="height: 42px;" src="
+                        <if condition='$v["facemini"]'>
+                            __ROOT__/Uploads/Face/{$v.facemini}
+                        <else/>
+                            __PUBLIC__/img/noface.gif
+                        </if>" class="media-object" />
+							</div>
+							<div class="media-body">
+								<h4 class="media-heading">{$v.username}</h4>
+								<p>{$v.comment}</p>{$v.commenttime}&nbsp;&nbsp;#{$v.floor}
+								<if condition=" $userid eq  $v.userid ">
+								<p class="text-right"> <a  href="{:U('deleComment',array('commentid' => $v['commentid'] ,'episodeid'=>$episode['episodeid']))}" >删除</a></p>
+								<else/> 
+                   					 
+ 								</if>	
+								
+							</div>
+							<hr />
+						</div>
+					</foreach>
+					<p>{$page}</p>
+				</div>
+				<!--右下结束-->
+			</div>
+		</div>
+	</body>
+
+</html>

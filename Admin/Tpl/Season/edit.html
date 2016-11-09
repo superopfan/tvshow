@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<title>编辑季</title>
+		<link rel="stylesheet" href="__PUBLIC__/Css/common.css" />
+		<link rel="stylesheet" href="__PUBLIC__/Uploadify/uploadify.css" />
+		<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+		<script src="__PUBLIC__/js/jquery-1.12.4.min.js"></script>
+		<script src="__PUBLIC__/js/bootstrap.min.js"></script>
+		<script type='text/javascript' src='__PUBLIC__/Js/edit.js'></script>
+		<script type="text/javascript" src='__PUBLIC__/Uploadify/jquery.uploadify.min.js'></script>
+		<script type='text/javascript'>
+			//var address = "{$user.location}";
+			//var constellation = "{$user.constellation}";
+			var PUBLIC = '__PUBLIC__';
+			var uploadUrl = '{:U("Common/uploadCover")}';
+			var sid = '{:session_id()}';
+			var ROOT = '__ROOT__';
+		</script>
+	</head>
+
+	<body>
+		<form action="{:U('editSeason')}" method='post' class="form-horizontal" style="  margin:10px 200px  ;">
+			<div class="form-group">
+				<label bel class="col-sm-2 control-label">季名称</label>
+					<div class="col-sm-10">
+						<input type="text" name="seasonname" class="form-control" id="inputEmail3" placeholder="季名称" value="{$season.seasonname}">
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">简介</label>
+				<div class="col-sm-10">
+					<textarea style="resize: none;" rows="15" name="summary" class="form-control" placeholder="简介" value="">{$season.summary}</textarea>
+				</div>
+			</div>
+			 <div class="form-group">
+				<label class="col-sm-2 control-label">第几季</label>
+				<div class="col-sm-10">
+				<input type="number" class="form-control" name="seasonnum" min="1" max="100" step="1" placeholder="第几季" value="{$season.seasonnum}">
+				</div>
+			</div>	
+			<div class="form-group">
+				<label class="col-sm-2 control-label">封面</label>
+				<div class="col-sm-10">
+					<div class='edit-face'>
+						 
+						<img src="
+                        <if condition='$season["covermini"]'>
+                            __ROOT__/Uploads/Cover/{$season.covermini}
+                        <else/>
+                            __PUBLIC__/Images/nocover.gif
+                        </if>" width='157' height='88' id='cover-img'/>
+						<p>
+							<input type="file" name='face' id='face'  coverstyle="season"/>
+						</p>
+						<div>
+							<input type="hidden" name='seasonid' value='{$season.seasonid}' />							 
+							<input type="hidden" name='covermax' value='{$season.covermax}' />
+							<input type="hidden" name='covermini' value='{$season.covermini}' />
+							<input style="height: 35px;" type="submit" value='保存' class="btn btn-success" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</body>
+
+</html>

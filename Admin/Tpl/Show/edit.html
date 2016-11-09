@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<title>编辑美剧</title>
+		<link rel="stylesheet" href="__PUBLIC__/Css/common.css" />
+		<link rel="stylesheet" href="__PUBLIC__/Uploadify/uploadify.css" />
+		<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+		<script src="__PUBLIC__/js/jquery-1.12.4.min.js"></script>
+		<script src="__PUBLIC__/js/bootstrap.min.js"></script>
+		<script type='text/javascript' src='__PUBLIC__/Js/edit.js'></script>
+		<script type="text/javascript" src='__PUBLIC__/Uploadify/jquery.uploadify.min.js'></script>
+		<script type='text/javascript'>
+			//var address = "{$user.location}";
+			//var constellation = "{$user.constellation}";
+			var PUBLIC = '__PUBLIC__';
+			var uploadUrl = '{:U("Common/uploadCover")}';
+			var sid = '{:session_id()}';
+			var ROOT = '__ROOT__';
+		</script>
+	</head>
+
+	<body>
+		<form action="{:U('editShow')}" method='post' class="form-horizontal" style="  margin:10px 200px  ;">
+			<div class="form-group">
+				<label bel class="col-sm-2 control-label">美剧名称</label>
+					<div class="col-sm-10">
+						<input type="text" name="showname" class="form-control" id="inputEmail3" placeholder="美剧名称" value="{$show.showname}">
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">简介</label>
+				<div class="col-sm-10">
+					<textarea style="resize: none;" rows="15" name="summary" class="form-control" placeholder="简介" value="">{$show.summary}</textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">类型</label>
+				<div class="col-sm-10">
+
+					<foreach name='style' item='v'>
+
+						<label class="checkbox-inline">
+ 						 <input 
+ 						  
+ 						 	<if condition="$v.isadd eq  1"> checked="checked"
+                            	<else />   
+                          </if>						 	
+ 						 	 name="type[]" type="checkbox" id="inlineCheckbox1" value="{$v.styleid}">{$v.stylename}
+					 </label>
+					</foreach>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">封面</label>
+				<div class="col-sm-10">
+					<div class='edit-face'>
+						 
+						<img src="
+                        <if condition='$show["covermini"]'>
+                           
+                    __ROOT__/Uploads/Cover/{$show.covermini}
+                        <else/>
+                          __PUBLIC__/Images/nocover.gif
+                        </if>" width='128' height='72' id='cover-img'/>
+						<p>
+								<input type="file" name='face' id='face'  coverstyle="show" />
+							 
+						</p>
+						<div>
+							<input type="hidden" name='showid' value='{$show.showid}' />
+							<input type="hidden" name='covermax' value='{$show.covermax}' />
+							<input type="hidden" name='covermini' value='{$show.covermini}' />
+							<input style="height: 35px;" type="submit" value='保存' class="btn btn-success" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</body>
+
+</html>

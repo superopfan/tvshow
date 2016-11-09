@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>我的美剧</title>
+		<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+		<script src="__PUBLIC__/js/jquery-1.12.4.min.js"></script>
+		<script src="__PUBLIC__/js/bootstrap.min.js"></script>
+		<script src="__PUBLIC__/js/myshow.js"></script>
+	
+	<style type="text/css">
+		* {
+			border: #FFFFFF;
+		}
+		#weekcon{
+			display: none;
+			
+		}
+		
+		.date {
+			font-size: 50px;
+		}
+		
+		.episode,
+		.show {
+			cursor: pointer;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		div#menu {
+			padding: 10px;
+			position: fixed;
+			overflow-y: auto;
+		}
+		
+		
+		a:hover {
+			text-decoration: none;
+		}
+		
+		
+		
+	</style>
+</head>
+	<body>
+		<div class="row" style="margin-right: 0px;">
+			<!-- 左边栏 开始-->
+			<include file='Common:left' />
+			<!-- 左边栏 结束-->
+		
+			<!-- 右边栏 开始-->
+			<div class=" col-sm-12 col-md-10"  >
+					<include file='Common:top' />
+					<foreach name='result' item='v' >
+						<div style="  background-color:#f9f9f9 ;margin-left:0px" id="bigbox" class="row">
+						<!-- 标题信息 开始-->														
+						<div style="  margin-bottom:15px;color:#2277aa; background-color:#f0f3f5" class="col-sm-12 col-md-12  ">
+							<h1>{$v.title}
+								<if condition='$v["styleid"]'>							
+								<small><a href="{:U('Myshow/index',array('styleid' => $v['styleid']))}"> more...  </a></small>
+							  <else/>
+							 </if>
+							</h1>
+						</div>
+						<!-- 标题信息 结束-->
+						<!-- 节目栏 开始-->
+					<if condition='null==$v.shows && !$v.shows'>
+						没有相关搜索结果
+					<else/>	
+						<foreach name='v.shows' item='k' >
+						<div class="  col-sm-4 col-md-4" style="width: 250px; height: 180px;">
+							<div class="thumbnail" style="  height: 160px;">
+								<img src="
+	                        			<if condition='$k["covermax"]'>
+	                         			   __ROOT__/Uploads/Cover/{$k.covermax}
+	                      				  <else/>
+	                         			   __PUBLIC__/Images/noface.gif
+	                      				 </if>"  />	
+								<div class="caption">
+									<p><a href="{:U('Season/index',array('sid' => $k['showid']))}" class="showname">{$k.showname}</a></p>
+								</div>
+							</div>
+						</div>
+						</foreach>
+					</if>						
+						<!-- 节目栏  结束-->
+						</div>
+					</foreach>								
+			</div>
+			<!-- 右边栏 结束-->
+		</div>
+	</body>
+
+</html>

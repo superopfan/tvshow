@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<title>季列表</title>
+		<link rel="stylesheet" href="__PUBLIC__/Css/common.css" />
+		<script type="text/javascript" src='__PUBLIC__/Js/jquery-1.8.2.min.js'></script>
+		 
+	</head>
+
+	<body>
+		<div class='status'>
+			<span>季列表 </span><a href="{:U('manage', array('station' => 'add','showid' =>$showid))}"  class='add lock'>新增</a>
+		</div>
+		<table class='table'>
+			<tr>
+				<th>ID</th>
+				<th>季名称</th>
+				<th>封面图</th>
+				<th>简介</th>
+			    <th>第几季</th>
+				<th>操作</th>
+			</tr>
+			<foreach name='seasons' item='v'>
+				<tr>
+					<td width='50' align='center'>{$v.seasonid}</td>
+					<td width='100'><a href="{:U('Episode/index',array('sid' => $v['seasonid']))}">{$v.seasonname}</a></td>
+					<td  align='center'>
+						 <img  width='60' src="__ROOT__/Uploads/Cover/{$v.covermini}" alt="" />
+					</td>
+					<td align='center'>
+						{$v.summary}
+					</td>
+					<td align='center'>
+						{$v.seasonnum}
+					</td>
+					
+					<td width='100' align='center'>
+						<a href="{:U('manage', array('station' => 'edit','seasonid' => $v['seasonid'],'showid' => $showid))}" class='add lock'>编辑</a>
+						<if condition='$_SESSION["admin"]'>
+						<a href="{:U('delSeason', array('seasonid' => $v['seasonid'],'showid' => $showid))}" class='add lock'>删除</a>
+						</if>
+					</td>
+				</tr>
+			</foreach>
+			<tr height='50'>
+				<td align='center' colspan='7'>{$page}</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+	<meta property="wb:webmaster" content="51b20ffab38ef491" />
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>个人美剧系统</title>
+		<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+		<script src="__PUBLIC__/js/jquery-1.12.4.min.js"></script>
+		<script src="__PUBLIC__/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			var watchurl = "{:U('Common/watch')}";
+		</script>
+		<script src="__PUBLIC__/js/myshow.js"></script>
+	
+	<style type="text/css">
+		* {
+			border: #FFFFFF;
+		}
+		
+		 
+		
+		.date {
+			font-size: 50px;
+		}
+		
+		.episode,
+		.showname,
+		.pre,
+		.nex {
+			cursor: pointer;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		div#menu {
+			padding: 10px;
+			position: fixed;
+			overflow-y: auto;
+		}
+		
+		a:hover {
+			text-decoration: none;
+		}
+		
+			 
+		
+		
+	</style>
+</head>
+	<body>		 
+		<div class="row" style="margin-right: 0px;">
+			<!-- 左边栏 开始-->
+			<include file='Common:left' />
+			<!-- 左边栏 结束-->
+			<!-- 右边栏 开始-->
+			<div class="col-sm-12 col-md-10">	
+				<include file='Common:top' />
+				<if condition='!$result'>
+					<div class="row" id="bigbox" style="  background-color:#f9f9f9 ;margin-left:0px">						 
+						<div class="col-sm-12 col-md-12  " style="  margin-bottom:15px;color:#2277aa; background-color:#f0f3f5">					 
+						<div class="date">本周没有节目播出</div>							 
+						</div>
+					</div>
+				<else/>				
+					<foreach name='result' item='v' key='k'>
+						<!-- 第一天 开始-->
+						<div class="row" id="bigbox" style="  background-color:#f9f9f9 ;margin-left:0px">
+							<!-- 日期信息 开始-->
+							<div class="col-sm-12 col-md-12  " style="  margin-bottom:15px;color:#2277aa; background-color:#f0f3f5">
+								<div class="date">{$k}</div>
+								<div class="month">{$v.month}</div>
+								<div class="day">{$v.day}</div>
+							</div>
+							<!-- 日期信息 结束-->
+							<!-- 节目栏 开始-->
+							<foreach name='v.info' item='t'>
+								<div class=" col-sm-4 col-md-4" style="width: 250px; height: 330px;">
+									<div class="thumbnail">
+										<img src="
+	                        			<if condition='$t["covermax"]'>
+	                         			   __ROOT__/Uploads/Cover/{$t.covermax}
+	                      				  <else/>
+	                         			   __PUBLIC__/Images/noface.gif
+	                      				 </if>"   id='face-img'/>	
+										<div class="caption">
+											<h3><a href="{:U('Episode/index',array('eid' => $t['episodeid']))}" class="episode">S0{$t.seasonnum}E0{$t.episodenum}</a></h3>
+											<p><a href="{:U('Season/index',array('sid' => $t['showid']))}" class="showname">{$t.showname}</a></p>										 
+											<span class="
+												<if condition=" $t.watched eq 1 ">
+													glyphicon glyphicon-ok
+	                   							<else/> 
+	                   								glyphicon glyphicon-eye-open
+	 											</if>	
+	 											watchbtn btn btn-default
+												" eid="{$t.episodeid}" iswatch="{$t.watched}" aria-hidden="true" role="button">
+												<if condition=" $t.watched eq 1 "> 已看!
+	                   							<else/> 已看?
+	 										</if>								
+											</span>																				
+										</div>
+									</div>
+								</div>
+							</foreach>
+							<!-- 节目栏  结束-->
+
+
+						</div>
+						<!-- 第一天 结束-->
+					</foreach>
+				</if>
+				
+				<!-- <a href="{:U('Login/wblogin')}" ><img src="__PUBLIC__/img/weibo_login.png"></a>
+	<a href="https://open.weixin.qq.com/connect/qrconnect?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect" >微信登陆</a> -->
+				
+			</div>
+			<!-- 右边栏 结束-->
+		</div>
+	</body>
+
+</html>
