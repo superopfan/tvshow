@@ -34,4 +34,9 @@ $(function () {
 			}
 		}
 	});
+
+	$("#login").click(function () {
+		$("#loginform").submit();
+
+	})
 });
