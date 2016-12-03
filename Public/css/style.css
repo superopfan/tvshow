@@ -23,7 +23,9 @@ h1, h2 {
     color: #555;
     line-height: 50px;
 }
-
+ .error{
+	color: red;
+}
 h3 {
 	font-size: 22px;
     font-weight: 300;

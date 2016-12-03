@@ -7,25 +7,25 @@ Class IndexAction extends CommonAction {
 	 * 登录页面
 	 */
 	Public function index() {
-		// if (isset($_GET['star'])) {
-		// 	$star = $this -> _GET('star');
-		// } else {
-		// 	$star = time();
-		// }
-		// // p( $star .'-------'. time() );
-		// // p(date("Y-m-d  ",$star).'-------'.date("Y-m-d  ", time()));
-		// if (isset($_GET['week'])) {
-		// 	$week = $this -> _GET('week');
-		// 	$this -> preweek = $week - 1;
-		// 	$this -> nextweek = $week + 1;
-		// 	$star = date("Y-m-d ", strtotime(($week . '  week'), $star));
-		// } else {
-		// 	$star = date("Y-m-d  ", $star);
-		// 	$this -> preweek = '-1';
-		// 	$this -> nextweek = '1';
-		// }
-		// $result = $this -> getWeek($star);
-		// $this -> result = $result ? $result : false;
+		if (isset($_GET['star'])) {
+			$star = $this -> _GET('star');
+		} else {
+			$star = time();
+		}
+		// p( $star .'-------'. time() );
+		// p(date("Y-m-d  ",$star).'-------'.date("Y-m-d  ", time()));
+		if (isset($_GET['week'])) {
+			$week = $this -> _GET('week');
+			$this -> preweek = $week - 1;
+			$this -> nextweek = $week + 1;
+			$star = date("Y-m-d ", strtotime(($week . '  week'), $star));
+		} else {
+			$star = date("Y-m-d  ", $star);
+			$this -> preweek = '-1';
+			$this -> nextweek = '1';
+		}
+		$result = $this -> getWeek($star);
+		$this -> result = $result ? $result : false;
 		$this -> display();
 	}
 

@@ -4,7 +4,7 @@
  */
 Class SeasonAction extends CommonAction {
 	/**
-	 * 登录页面
+	 * 
 	 */
 	Public function index() {
 		if (isset($_GET['sid'])) {
@@ -38,7 +38,7 @@ Class SeasonAction extends CommonAction {
 		$where['showid'] = $showid;
 		$where['seasonnum'] = $seasonnum;
 		if ($this -> isFollow($showid)) {
-			$sql = 'select * from seasonView where showid = ' . $showid . ' and seasonnum = ' . $seasonnum . ' and userid = ' . $userid;
+			$sql = 'select * from seasonView where showid = ' . $showid . ' and seasonnum = ' . $seasonnum . ' and userid = ' . $userid .' order by episodenum';
 			$Model = new Model();
 			$result = $Model -> query($sql);
 		} else {

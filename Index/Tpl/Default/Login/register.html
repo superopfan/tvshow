@@ -1,53 +1,114 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-		<title> 注册</title>
-		<link rel="stylesheet" href="__PUBLIC__/Css/regis.css" />
-		<js file='__PUBLIC__/Js/jquery-1.7.2.min.js' />
-		<js file='__PUBLIC__/Js/jquery-validate.js' />
-		<script type='text/javascript'>
-			var checkAccount = "{:U('checkAccount')}";
-			var checkUname = "{:U('checkUname')}";
-			var checkVerify = "{:U('checkVerify')}";
-		</script>
-		<js file='__PUBLIC__/Js/register.js' />
-	</head>
+<head>
 
-		<body>
-		<div id='logo'></div>
-		<div id='reg-wrap'>
-			<form action="{:U('runRegis')}" method='post' name='register'>
-				<fieldset>
-					<legend>用户注册</legend>
-					<p>
-						<label for="account">登录账号：</label>
-						<input type="text" name='account' id='account' class='input' />
-					</p>
-					<p>
-						<label for="pwd">登录密码：</label>
-						<input type="password" name='pwd' id='pwd' class='input' />
-					</p>
-					<p>
-						<label for="pwded">确认密码：</label>
-						<input type="password" name='pwded' class='input' />
-					</p>
-					<p>
-						<label for="uname">昵称：</label>
-						<input type="text" name='uname' id='uname' class='input' />
-					</p>
-					<p>
-						<label for="verify">验证码：</label>
-						<input type="text" name='verify' class='input' id='verify' />
-						<img src="{:U('verify')}" width='80' height='25' id='verify-img' />
-					</p>
-					<p class='run'>
-						<input type="submit" value='马上注册' id='regis' />
-					</p>
-				</fieldset>
-			</form>
-		</div>
-	</body>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>个人美剧管理系统</title>
 
+    <!-- CSS -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/form-elements.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/style.css">
+
+    <js file='__PUBLIC__/Js/jquery-1.7.2.min.js' />
+    <js file='__PUBLIC__/Js/jquery-validate.js' />
+    <script type='text/javascript'>
+        var checkAccount = "{:U('checkAccount')}";
+        var checkUname = "{:U('checkUname')}";
+        var checkVerify = "{:U('checkVerify')}";
+    </script>
+    <js file='__PUBLIC__/Js/register.js' />
+
+</head>
+
+<body>
+
+<!-- Top content -->
+<div class="top-content" style="background:rgba(0, 0, 0, 0.7)">
+
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1><strong>美剧管理系统</strong> 注册</h1>
+                    <div class="description">
+                        <!--<p>-->
+                        <!--This is a free responsive login form made with Bootstrap.-->
+                        <!--Download it on <a href="http://azmind.com"><strong>AZMIND</strong></a>, customize and use it as you like!-->
+                        <!--</p>-->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 form-box">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <!--<h3>Login to our site</h3>-->
+                            <!--<p>Enter your username and password to log on:</p>-->
+                            <h3></h3>
+                            <h3>注册</h3>
+
+                        </div>
+                        <div class="form-top-right">
+                            <i class="fa fa-lock"></i>
+                        </div>
+                    </div>
+                    <div class="form-bottom">
+                        <form action="{:U('runRegis')}" method='post' name='register' id="regisform">
+
+                            <div class="form-group">
+                                <label class="sr-only" for="form-username">登录账号</label>
+                                <input type="text" name="account" placeholder="登录账号" class="form-username form-control input"
+                                       id="account"  />
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-username">登录密码</label>
+                                <input type="password" name="pwd" placeholder="登录密码" class="form-username form-control input"
+                                       id="pwd"  />
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-username">确认密码</label>
+                                <input type="password" name="pwded" placeholder="确认密码" class="form-username form-control input"
+                                          />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="sr-only" for="form-username">昵称</label>
+                                <input type="text" name="uname" placeholder="昵称" class="form-username form-control input"
+                                       id="uname"  />
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-username">验证码</label>
+                                <input type="text" name="verify" placeholder="验证码" class="form-username form-control input"
+                                       id="verify"  />
+                                <img src="{:U('verify')}" width='80' height='25' id='verify-img' />
+                            </div>
+                            <div>
+                                <button type="submit" class="btn" id="regis">马上注册</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<script src="__PUBLIC__/js/jquery-1.12.4.min.js"></script>-->
+<!--<script src="__PUBLIC__/js/bootstrap.min.js"></script>-->
+<script src="__PUBLIC__/js/jquery.backstretch.min.js"></script>
+
+<script>
+
+    var PUBLIC = '__PUBLIC__';
+
+
+</script>
+<script src="__PUBLIC__/js/scripts.js"></script>
+</body>
 </html>
